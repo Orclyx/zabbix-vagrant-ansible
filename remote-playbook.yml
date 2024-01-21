@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - role: community.zabbix.zabbix_agent
+      zabbix_agent2_hostname: Remote
+      zabbix_agent_ip: 192.168.50.2 # You shouldn't typically need to set this explicitly
+  vars_files:
+    - remote-vars.yml

@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  roles:
+    - role: geerlingguy.apache
+      apache_create_vhosts: false
+      apache_remove_default_vhost: true
+
+    - geerlingguy.mysql
+
+    - geerlingguy.php-versions
+    - geerlingguy.php
+
+    - role: community.zabbix.zabbix_server
+      zabbix_server_mysql_login_user: "{{ mysql_user_name }}"
+      zabbix_server_mysql_login_password: "{{ mysql_user_password }}"
+
+    - role: community.zabbix.zabbix_agent
+      zabbix_agent2_hostname: Zabbix server
+      zabbix_agent2_server: 127.0.0.1
+      zabbix_agent2: true
+
+    - role: community.zabbix.zabbix_web
+      zabbix_server_hostname: 127.0.0.1
+  vars:
+    php_version: "8.3"
+    zabbix_server_database: mysql
+    zabbix_server_dbport: 3306
+    zabbix_server_dbpassword: !unsafe zabbix

@@ -1,0 +1,13 @@
+---
+roles:
+  - geerlingguy.apache
+  - geerlingguy.mysql
+  - geerlingguy.php
+  - geerlingguy.php-versions
+
+collections:
+  - ansible.netcommon
+  - ansible.posix
+  - community.general
+  - community.mysql
+  - community.zabbix
